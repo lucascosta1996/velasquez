@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import axios from 'axios'
 import './App.css'
 import ClientsList from './components/Clients/ClientsList'
@@ -71,7 +70,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.clients)
     return (
       <div className="App">
         <header className="App-header">

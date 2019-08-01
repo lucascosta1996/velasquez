@@ -32,7 +32,7 @@ const Select = styled.select`
 class ClientsList extends Component {
   state = {
     clients: [],
-    sorting: ''
+    sorting: 'default'
   }
 
   componentWillReceiveProps( props ){
@@ -84,12 +84,12 @@ class ClientsList extends Component {
     const { sorting } = this.state
     const { clients } = this.props
     return (
-      <div className="ClientsList" onChange={this.handleSort.bind(this)}>
+      <div className="ClientsList">
         {
           clients.length > 0 &&
           <Fragment>
-            <Select value={sorting}>
-              <option selected>Selecione um filtro...</option>
+            <Select onChange={this.handleSort.bind(this)} value={sorting}>
+              <option value="default">Selecione um filtro...</option>
               <option value="loyalty">Mais fiéis</option>
               <option value="mostExpensive">Valor total em compras</option>
             </Select>
@@ -98,8 +98,9 @@ class ClientsList extends Component {
                 clients && clients.map( ( client ) => (
                   <Card
                     cpf={ client.cpf.replace( '-', '.' ) }
-                    purchases={ client.compras && client.compras.length }
+                    key={ client.cpf }
                     id={ client.id }
+                    purchases={ client.compras && client.compras.length }
                     name={ client.nome }
                     totalValue={ client.totalGasto && formatCurrency( client.totalGasto ) }
                     recommendation={ client.recomendacao && client.recomendacao }
